@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extendsjjjjjjjjjj \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
 class UserFactory extends Factory
 {
@@ -22,6 +22,8 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'matricula'=> fake()->randomElement($array=['180700','190700','200700']).fake()->randomNumber(2,true),
+            'carrera'=> fake()->randomElement($array2=['ISC','II','IE','IER','IEM']),
             'remember_token' => Str::random(10),
         ];
     }
