@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nota;
+use App\Models\Tema;
 use Illuminate\Http\Request;
 
 class NotaController extends Controller
@@ -23,18 +24,18 @@ class NotaController extends Controller
 
     public function create()
     {
-        return view('notas.crear');
+        $tema = Tema::all();
+        return view('notas.crear', compact('tema'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $input = $request->all();
+
+        if (!Tema::where('id', $input['id_tema'])->exists()) {
+            return redirect()->back()->withErrors(['id_tema' => 'El tema seleccionado no existe.'])->withInput();
+        }
         Nota::create($input);
         return redirect('nota')->with('flash_message', 'Nota Addedd!');
     }

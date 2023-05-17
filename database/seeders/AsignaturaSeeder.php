@@ -16,7 +16,7 @@ class AsignaturaSeeder extends Seeder
     public function run()
     {
         Asignatura::factory()
-        ->count(10)
+        ->count(100)
         ->create();
     }
 }

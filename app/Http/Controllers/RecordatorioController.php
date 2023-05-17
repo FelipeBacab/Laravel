@@ -15,7 +15,7 @@ class RecordatorioController extends Controller
     public function index()
     {
         $user_id = auth()->id();
-        $recordatorios = Recordatorio::where('id_usuario', $user_id)->get();
+        $recordatorios = recordatorio::where('id_usuario', $user_id)->get();
 
         return view('recordatorios.index')->with('recordatorios', $recordatorios);
     }
@@ -26,17 +26,13 @@ class RecordatorioController extends Controller
         return view('recordatorios.crear');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $input = $request->all();
-        Recordatorio::create($input);
-        return redirect('recordatorio')->with('flash_message', 'Recordatorio Addedd!');
+
+        recordatorio::create($input);
+        return redirect('recordatorio')->with('flash_message', 'recordatorio Addedd!');
     }
 
     /**
@@ -47,7 +43,7 @@ class RecordatorioController extends Controller
      */
     public function show($id)
     {
-        $recordatorio = Recordatorio::find($id);
+        $recordatorio = recordatorio::find($id);
         return view('recordatorios.mostrar')->with('recordatorios', $recordatorio);
     }
 
@@ -59,7 +55,7 @@ class RecordatorioController extends Controller
      */
     public function edit($id)
     {
-        $recordatorio = Recordatorio::find($id);
+        $recordatorio = recordatorio::find($id);
         return view('recordatorios.editar')->with('recordatorios', $recordatorio);
     }
 
@@ -72,10 +68,10 @@ class RecordatorioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $recordatorio = Recordatorio::find($id);
+        $recordatorio = recordatorio::find($id);
         $input = $request->all();
         $recordatorio->update($input);
-        return redirect('recordatorio')->with('flash_message', 'Recordatorio Updated!');
+        return redirect('recordatorio')->with('flash_message', 'recordatorio Updated!');
     }
 
     /**
@@ -86,7 +82,7 @@ class RecordatorioController extends Controller
      */
     public function destroy($id)
     {
-        Recordatorio::destroy($id);
-        return redirect('recordatorio')->with('flash_message', 'Recordatorio deleted!');
+        recordatorio::destroy($id);
+        return redirect('recordatorio')->with('flash_message', 'recordatorio deleted!');
     }
 }

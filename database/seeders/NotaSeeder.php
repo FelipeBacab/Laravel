@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Nota;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,8 +16,13 @@ class NotaSeeder extends Seeder
      */
     public function run()
     {
-        Nota::factory()
+        $users=User::all();
+        foreach ($users as $user){
+            Nota::factory()
             ->count(20)
-            ->create();
+            ->create(
+                ['id_usuario'=> $user->id]
+            );
+        }
     }
 }
